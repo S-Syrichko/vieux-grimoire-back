@@ -11,5 +11,7 @@
 
 To make project functionnal, you have to create a .env file with following variables :
 
+
 `MONGO_URI` : Contains the mongo connection URI as string
+
 `TOKEN_SECRET` : Contains the secret string to encode JWT tokens
