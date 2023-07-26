@@ -1,4 +1,5 @@
 const multer = require("multer");
+const { RequestError } = require("../error/customError.js");
 
 const MIME_TYPES = {
   "image/jpg": "jpg",
@@ -17,4 +18,15 @@ const storage = multer.diskStorage({
   },
 });
 
-module.exports = multer({ storage }).single("image");
+const fileFilter = (req, file, callback) => {
+  const allowedMimeTypes = Object.keys(MIME_TYPES);
+  if (allowedMimeTypes.includes(file.mimetype)) {
+    callback(null, true);
+  } else {
+    callback(
+      new RequestError(400, "Format de fichier non valide. Seuls les fichiers jpg, jpeg et png sont acceptés.")
+    );
+  }
+};
+
+module.exports = multer({ storage, fileFilter }).single("image");

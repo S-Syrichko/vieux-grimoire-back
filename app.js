@@ -7,6 +7,8 @@ const mongoose = require("mongoose");
 const userRoutes = require("./routes/user");
 const bookRoutes = require("./routes/book");
 
+const errorHandler = require('./error/errorHandler.js');
+
 mongoose
   .connect(
     process.env.MONGO_URI,
@@ -30,9 +32,12 @@ app.use((req, res, next) => {
   );
   next();
 });
+
+//Routes
 app.use(express.json());
 app.use("/api/auth", userRoutes);
 app.use("/api/books", bookRoutes);
 app.use("/images", express.static(path.join(__dirname, "images")));
+app.use(errorHandler);
 
 module.exports = app;
