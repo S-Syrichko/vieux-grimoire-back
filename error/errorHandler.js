@@ -11,19 +11,20 @@ const errorHandler = (err, req, res, next) => {
   // Multer-specific error handling
   if (err instanceof multer.MulterError) {
     if (err.code === "LIMIT_UNEXPECTED_FILE") {
-      res
-        .status(400)
-        .json({ error: "Too many files uploaded. Only one file is allowed." });
+      statusCode = 400;
+      message = {
+        message: "Too many files uploaded. Only one file is allowed.",
+      };
     } else if (err.code === "LIMIT_FILE_SIZE") {
-      res
-        .status(400)
-        .json({
-          error: "File size too large. Maximum file size allowed is 2MB.",
-        });
+      statusCode = 400;
+      message = {
+        message: "File size too large. Maximum file size allowed is 2MB.",
+      };
     } else {
-      res
-        .status(500)
-        .json({ error: "File upload failed. Please try again later." });
+      statusCode = 500;
+      message = {
+        message: "File upload failed. Please try again later.",
+      };
     }
   }
   return res.status(statusCode).json(message);
