@@ -108,7 +108,7 @@ exports.getOneBook = async (req, res, next) => {
 
     //Send response
     res.status(200).json(book);
-  } catch {
+  } catch (err) {
     next(err);
   }
 };
@@ -139,7 +139,7 @@ exports.updateBook = async (req, res, next) => {
       const filename = book.imageUrl.split("/images/")[1];
       fs.unlink(`images/${filename}`, () => {});
     }
-    
+
     //Update book
     Object.assign(book, bookObject);
     const updateBook = await book.save();
