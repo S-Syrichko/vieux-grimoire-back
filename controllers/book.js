@@ -1,6 +1,7 @@
 const { BookError, RequestError } = require("../error/customError.js");
 const Book = require("../models/Book");
 const fs = require("fs");
+var _ = require("lodash");
 
 exports.createBook = async (req, res, next) => {
   try {
@@ -17,6 +18,7 @@ exports.createBook = async (req, res, next) => {
     book.imageUrl = `${req.protocol}://${req.get("host")}/images/${
       req.file.filename
     }`;
+    book.averageRating = book.ratings[0].grade;
 
     //Save Book
     const saveBook = await book.save();
@@ -116,7 +118,6 @@ exports.getOneBook = async (req, res, next) => {
 exports.updateBook = async (req, res, next) => {
   try {
     if (!req.params.id) throw new RequestError(400, "Données invalides");
-
     //Get body and file
     const bookObject = req.file
       ? {
@@ -140,8 +141,13 @@ exports.updateBook = async (req, res, next) => {
       fs.unlink(`images/${filename}`, () => {});
     }
 
-    //Update book
-    Object.assign(book, bookObject);
+    //Modify book
+    _.merge(book, bookObject);
+    book.averageRating =
+      book.ratings.reduce((acc, rating) => acc + rating.grade, 0) /
+      (book.ratings.length || 1);
+
+    //Save book
     const updateBook = await book.save();
     if (!updateBook)
       throw new BookError(500, "Erreur lors de la mise à jour du livre");
