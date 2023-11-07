@@ -1,7 +1,7 @@
 # Mon vieux Grimoire
 ## Backend
 This project is a backend API for a book sharing platform.<br>
-You also can visit [frontend repo](https://github.com/S-Syrichko/vieux-grimoire-front){:target="_blank"}
+You also can visit <a href="https://github.com/S-Syrichko/vieux-grimoire-front" target="_blank">frontend repo</a>
 
 ## Start project
 ### With npm
