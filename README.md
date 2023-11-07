@@ -1,13 +1,13 @@
 # Mon vieux Grimoire
 ## Backend
 This project is a backend API for a book sharing platform.<br>
-You also can visit [frontend repo](https://github.com/S-Syrichko/vieux-grimoire-front)
+You also can visit [frontend repo](https://github.com/S-Syrichko/vieux-grimoire-front){:target="_blank"}
 
 ## Start project
 ### With npm
 `npm install` then `npm run dev` will launch the project.
 ### With Docker
-`docker-compose up -d`
+`docker-compose up -d` will create and launch a docker container
   
 
 #### Environnement variables
