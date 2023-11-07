@@ -1,17 +1,19 @@
-# Mon vieux Grimoire Backend
+# Mon vieux Grimoire
+## Backend
+This project is a backend API for a book sharing platform.
+You also can visit [frontend repo](https://github.com/S-Syrichko/vieux-grimoire-front)
 
-
-## Start project 
-
+## Start project
 ### With npm
-
- `npm install` then `npm run dev` will launch the project.
+`npm install` then `npm run dev` will launch the project.
+### With Docker
+`docker-compose up -d`
+  
 
 #### Environnement variables
-
 To make project functionnal, you have to create a .env file with following variables :
 
-
 `MONGO_URI` : Contains the mongo connection URI as string
-
 `TOKEN_SECRET` : Contains the secret string to encode JWT tokens
+
+The project will start on port `4000`
