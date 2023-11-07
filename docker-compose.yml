@@ -1,0 +1,9 @@
+services:
+  app:
+    build: .
+    image: vieux-grimoire-image
+    container_name: vieux-grimoire-container
+    stdin_open: true
+    tty: true
+    ports:
+      - "4000:4000"
