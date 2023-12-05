@@ -16,7 +16,7 @@ exports.createBook = async (req, res, next) => {
 
     //Modify book
     book.userId = req.auth.userId;
-    book.imageUrl = `${req.protocol}://${process.env.HOST}/images/${
+    book.imageUrl = `https://${process.env.HOST}/images/${
       req.file.filename
     }`;
     book.averageRating = book.ratings[0].grade;
@@ -123,7 +123,7 @@ exports.updateBook = async (req, res, next) => {
     const bookObject = req.file
       ? {
           ...JSON.parse(req.body.book),
-          imageUrl: `${req.protocol}://${process.env.HOST}/images/${
+          imageUrl: `https://${process.env.HOST}/images/${
             req.file.filename
           }`,
         }
