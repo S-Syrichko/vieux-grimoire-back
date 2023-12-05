@@ -1,3 +1,4 @@
+require('dotenv').config();
 const { BookError, RequestError } = require("../error/customError.js");
 const Book = require("../models/Book");
 const fs = require("fs");
@@ -15,7 +16,7 @@ exports.createBook = async (req, res, next) => {
 
     //Modify book
     book.userId = req.auth.userId;
-    book.imageUrl = `${req.protocol}://${req.get("host")}/images/${
+    book.imageUrl = `${req.protocol}://${process.env.HOST}/images/${
       req.file.filename
     }`;
     book.averageRating = book.ratings[0].grade;
@@ -122,7 +123,7 @@ exports.updateBook = async (req, res, next) => {
     const bookObject = req.file
       ? {
           ...JSON.parse(req.body.book),
-          imageUrl: `${req.protocol}://${req.get("host")}/images/${
+          imageUrl: `${req.protocol}://${process.env.HOST}/images/${
             req.file.filename
           }`,
         }
