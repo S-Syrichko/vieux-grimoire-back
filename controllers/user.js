@@ -13,6 +13,8 @@ exports.signup = async (req, res, next) => {
       throw new RequestError(400, "Email ou mot de passe manquant");
     }
 
+    throw new UserError(500, "Création de comptes désactivée. Contactez l'auteur pour une démonstration.");
+
     //Hash password
     const hash = await bcrypt.hash(password, 10).catch(() => {
       throw new UserError(
